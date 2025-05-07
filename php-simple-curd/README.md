@@ -59,3 +59,61 @@ mysqli_insert_id returns the last auto-incremented ID that was inserted into the
 ```bash
 mysqli_insert_id($conn);
 ```
+
+
+
+# MySQLi ke commonly used prepared statement functions
+Zaroor! Yahan main aapko PHP MySQLi ke commonly used prepared statement functions ka explanation deta hoon, including get_result, bind_param, mysqli_stmt_bind_param, and mysqli_prepare.
+
+
+#### ✅ 1. mysqli_prepare()
+Purpose: SQL query ko server ke liye prepare karta hai, taake usme dynamic data securely insert kiya ja sake (SQL injection se bachav).
+
+```bash
+$stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE id = ?");
+```
+
+#### ✅ 2. mysqli_stmt_bind_param() OR $stmt->bind_param()
+Purpose: Prepared statement ke placeholders (?) ko actual values se bind karta hai.
+```bash
+// Object-oriented
+$stmt->bind_param("i", $id);
+
+// Procedural
+mysqli_stmt_bind_param($stmt, "i", $id);
+```
+
+| Type | Meaning       |
+| ---- | ------------- |
+| `i`  | Integer       |
+| `d`  | Double        |
+| `s`  | String        |
+| `b`  | Blob (binary) |
+
+
+```bash
+$stmt->bind_param("ssi", $name, $email, $id); // 2 strings, 1 integer
+```
+
+#### ✅ 3. $stmt->execute()
+Purpose: Prepared query ko execute karta hai.
+
+```bash
+$stmt->execute();
+```
+
+#### ✅ 4. $stmt->get_result()
+Purpose: Execute hone ke baad result ko fetch karta hai (like mysqli_query ka result).
+
+```bash
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+```
+
+| Function           | Purpose                                |
+| ------------------ | -------------------------------------- |
+| `mysqli_prepare()` | SQL query prepare karta hai            |
+| `bind_param()`     | Placeholder ko value se bind karta hai |
+| `execute()`        | Query run karta hai                    |
+| `get_result()`     | Result fetch karta hai                 |
+

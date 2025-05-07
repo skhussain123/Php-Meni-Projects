@@ -48,11 +48,14 @@ if (isset($_SESSION['message'])) {
                     </thead>
                     <tbody>
                         <?php
+                        // Simple fetch Example
+
                         $query = "SELECT * FROM students ORDER BY id DESC";
                         $result = mysqli_query($conn, $query);
 
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
+
                         ?> <tr>
                                     <td><?php echo $row['id']; ?></td>
                                     <td><?php echo $row['name']; ?></td>
@@ -68,7 +71,39 @@ if (isset($_SESSION['message'])) {
                         } else {
                             echo "<tr><td colspan='6' class='text-center'>No students found.</td></tr>";
                         }
+
+
+                        // prepared statement example sql injection prevention
+                                    // $stmt = $conn->prepare("SELECT * FROM students ORDER BY id DESC");
+                                    // $stmt->execute();
+                                    // $result2 = $stmt->get_result();
+                                    
                         ?>
+
+                         <?php
+                            //             if ($result2->num_rows > 0) {
+                            //                 while ($row = $result2->fetch_assoc()) {
+                            //                     echo "<tr>
+                            //     <td>{$row['id']}</td>
+                            //     <td>{$row['name']}</td>
+                            //     <td>{$row['email']}</td>
+                            //     <td>{$row['phone']}</td>
+                            //     <td>{$row['course']}</td>
+                            //     <td>
+                            //         <a href='edit.php?id={$row['id']}'>Edit</a> |
+                            //         <a href='delete.php?id={$row['id']}'>Delete</a>
+                            //     </td>
+                            // </tr>";
+                            //                 }
+                            //             } else {
+                            //                 echo "<tr><td colspan='6'>No students found</td></tr>";
+                            //             }
+                            ?>
+
+
+
+
+
                     </tbody>
                 </table>
             </div>

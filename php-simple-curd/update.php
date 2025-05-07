@@ -12,7 +12,8 @@ if (isset($_POST['btnupdate'])) {
     $phone = $_POST['upassword'];
     $course = $_POST['ucourse'];
 
-    // Prepare an update statement
+    
+    // Prepare an update statement in a secure way to prevent SQL injection
     $stmt = $conn->prepare("UPDATE students SET name=?, email=?, phone=?, course=? WHERE id=?");
     $stmt->bind_param("ssssi", $name, $email, $phone, $course, $id);
 

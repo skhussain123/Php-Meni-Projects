@@ -34,9 +34,18 @@
 
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
+
+                    //Simple fetch Example
                     $query = "SELECT * FROM students WHERE id = $id";
                     $result = mysqli_query($conn, $query);
                     $row = mysqli_fetch_assoc($result);
+
+                    //prepare statement to prevent SQL injection
+                    // $stmt = $conn->prepare("SELECT * FROM students WHERE id = ?");
+                    // $stmt->bind_param("i", $id);
+                    // $stmt->execute();
+                    // $result2 = $stmt->get_result();
+                    // $row = $result2->fetch_assoc();
                 }
                 ?>
                 <form action="update.php?id=<?php echo $id; ?>" method="POST">
